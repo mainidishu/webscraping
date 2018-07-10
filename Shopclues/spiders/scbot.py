@@ -10,12 +10,15 @@ class ShopcluesSpider(scrapy.Spider):
 	}
 
 	def parse(self, response):
-		price = response.css('.p_price::text').extract()
-		
+		Discount = response.css('.prd_discount::text').extraxt()
+		Price = response.css('.p_price::text').extract()
+		Old_price = response.css('.old_prices::text').extract()
 
-		for item in zip(price):
+		for item in zip(Discount,Price,Old_price):
 			scraped_info = {
-				'price' : item[0],
+				'Price' : item[0],
+				'Discount' : item[1],
+				'Old_Price' : item[2],
 			}
 			yield scraped_info
 
